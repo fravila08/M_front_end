@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "m_front_end",
-    "slug": "m_front_end",
+    "slug": "m-front-end",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "99e759cb-7e21-4f1d-922a-33d0f7adec1b"
+      }
+    },
+    "owner": "fravila08"
   }
 }
