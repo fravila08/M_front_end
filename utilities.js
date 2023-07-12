@@ -23,19 +23,20 @@ export const alterAxios = async () => {
   return axiosInstance;
 };
 
-export const logOut = async() => {
-    const formattedAxios = await alterAxios()
-    formattedAxios.post("users/logout/")
-    .then(resp => {
-        tokenManagement()
-        console.log("complete", resp.status)
-        return null    
+export const logOut = async () => {
+  const formattedAxios = await alterAxios();
+  formattedAxios
+    .post("users/logout/")
+    .then((resp) => {
+      tokenManagement();
+      console.log("complete", resp.status);
+      return null;
     })
-    .catch((err)=>{
-        console.log(err)
-        return null
-    })
-}
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
+};
 
 export const evalElement = (title, newContent) => {
   switch (title) {
@@ -54,3 +55,18 @@ export const evalElement = (title, newContent) => {
   }
 };
 
+export const fetchLorem = async (paragraphs) => {
+  try {
+    const response = await axios.get(
+      `https://api.api-ninjas.com/v1/loremipsum?paragraphs=${paragraphs}`,
+      {
+        headers: { "X-Api-Key": "YOUR_API_KEY" },
+        contentType: "application/json",
+      }
+    );
+    console.log(response.data);
+    return response;
+  } catch (error) {
+    console.error("Error:", error.response.data);
+  }
+};
