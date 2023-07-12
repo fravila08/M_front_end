@@ -30,6 +30,7 @@ export default function App() {
           <>
           <Stack.Screen name="Profile" component={UserProfile} />
           <Stack.Screen name="NewsFeed" component={NewsFeed} />
+          <Stack.Screen name="Affirmations" component={Affirmations} /> 
           </>
           :
           <Stack.Screen name="SignUp" component={SignUp} />
