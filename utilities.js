@@ -1,56 +1,56 @@
-import * as SecureStore from "expo-secure-store";
-import axios from "axios";
-import { useState, createContext } from "react";
+import * as SecureStore from 'expo-secure-store';
+import axios from 'axios';
+import { useState, createContext } from 'react';
 
 export const UserContext = createContext();
 
 export const tokenManagement = async (token = null) => {
   if (token) {
-    await SecureStore.setItemAsync("authToken", `Token ${token}`);
+    await SecureStore.setItemAsync('authToken', `Token ${token}`);
   } else {
-    await SecureStore.deleteItemAsync("authToken");
+    await SecureStore.deleteItemAsync('authToken');
   }
 };
 
 export const alterAxios = async () => {
-  const API_URL = "https://tango-dep.com/api/";
+  const API_URL = 'http://127.0.0.1:8000/api/';
   const axiosInstance = axios.create({
     baseURL: API_URL,
     headers: {
-      Authorization: await SecureStore.getItemAsync("authToken"),
+      Authorization: await SecureStore.getItemAsync('authToken'),
     },
   });
   return axiosInstance;
 };
 
-export const logOut = async() => {
-    const formattedAxios = await alterAxios()
-    formattedAxios.post("users/logout/")
-    .then(resp => {
-        tokenManagement()
-        console.log("complete", resp.status)
-        return null    
+export const logOut = async () => {
+  const formattedAxios = await alterAxios();
+  formattedAxios
+    .post('users/logout/')
+    .then((resp) => {
+      tokenManagement();
+      console.log('complete', resp.status);
+      return null;
     })
-    .catch((err)=>{
-        console.log(err)
-        return null
-    })
-}
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
+};
 
 export const evalElement = (title, newContent) => {
   switch (title) {
-    case "years_of_xp":
+    case 'years_of_xp':
       return { years_of_xp: newContent };
-    case "job_title":
+    case 'job_title':
       return { job_title: newContent };
-    case "profession":
+    case 'profession':
       return { profession: newContent };
-    case "employer":
+    case 'employer':
       return { employer: newContent };
-    case "user":
+    case 'user':
       return { user: newContent };
     default:
       return { bio: newContent };
   }
 };
-
