@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Text,
   View,
   TextInput,
   TouchableOpacity,
   StyleSheet,
-} from "react-native";
-import { alterAxios, evalElement } from "../utilities";
+} from 'react-native';
+import { alterAxios, evalElement } from '../utilities';
 
 export const ProfileItem = ({ ele }) => {
   const [edit, setEdit] = useState(false);
@@ -15,7 +15,10 @@ export const ProfileItem = ({ ele }) => {
 
   const updateProfileItem = async (newContent) => {
     const formattedAxios = await alterAxios();
-    formattedAxios.put("users/profile/", evalElement(ele.title, newContent));
+    formattedAxios.put(
+      'users/profile/',
+      evalElement(ele.title, newContent)
+    );
   };
 
   const evaluateUpdate = () => {
@@ -27,18 +30,21 @@ export const ProfileItem = ({ ele }) => {
         setInputContent(elemContent);
       }
     } else {
-      if (!isNaN(parseFloat(inputContent)) && elemContent !== inputContent) {
+      if (
+        !isNaN(parseFloat(inputContent)) &&
+        elemContent !== inputContent
+      ) {
         if (Number(inputContent) <= 20) {
           setElemContent(inputContent);
           updateProfileItem(inputContent);
         } else {
-          setElemContent("20");
-          setInputContent("20");
-          updateProfileItem("20");
+          setElemContent('20');
+          setInputContent('20');
+          updateProfileItem('20');
         }
       } else {
         setInputContent(elemContent);
-        console.log("Wrong Input");
+        console.log('Wrong Input');
       }
     }
   };
@@ -50,7 +56,10 @@ export const ProfileItem = ({ ele }) => {
           {edit ? (
             <TouchableOpacity
               style={[styles.edit]}
-              onPress={() => [setEdit(!edit), setInputContent(elemContent)]}
+              onPress={() => [
+                setEdit(!edit),
+                setInputContent(elemContent),
+              ]}
             >
               <Text>❌</Text>
             </TouchableOpacity>
@@ -69,8 +78,8 @@ export const ProfileItem = ({ ele }) => {
             <TextInput
               placeholder={`${elemContent}`}
               multiline
-              numberOfLines={ele.title === "bio" ? 10 : 1}
-              maxLength={ele.title === "bio" ? 500 : 20}
+              numberOfLines={ele.title === 'bio' ? 10 : 1}
+              maxLength={ele.title === 'bio' ? 500 : 20}
               style={[styles.input]}
               value={`${inputContent}`}
               onChangeText={(text) => setInputContent(text)}
@@ -94,26 +103,26 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   itemTitle: {
-    fontWeight: "600",
+    fontWeight: '600',
     fontSize: 14,
-    textTransform: "capitalize",
+    textTransform: 'capitalize',
     marginBottom: 10,
   },
   header: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   edit: {
-    height: "auto",
+    height: 'auto',
     width: 17,
     marginRight: 10,
   },
   input: {
-    backgroundColor: "white",
-    color: "black",
-    width: "90%",
+    backgroundColor: 'white',
+    color: 'black',
+    width: '90%',
     marginRight: 5,
   },
   inputView: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
 });
