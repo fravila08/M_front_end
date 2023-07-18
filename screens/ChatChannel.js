@@ -21,7 +21,7 @@ import {
 } from '../contexts/ChatContext';
 
 const ChannelScreen = ({ navigation }) => {
-  const { channel, setThread } = useAppContext();
+  const { channel, setThread } = useChatContext();
   return (
     <Channel channel={channel}>
       <MessageList

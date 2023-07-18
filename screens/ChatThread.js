@@ -21,7 +21,7 @@ import {
 } from '../contexts/ChatContext';
 
 export const ThreadScreen = ({ navigation }) => {
-  const { channel, thread } = useAppContext();
+  const { channel, thread } = useChatContext();
   return (
     <Channel channel={channel} thread={thread} threadList>
       <Thread />

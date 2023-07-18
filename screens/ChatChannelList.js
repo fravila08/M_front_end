@@ -20,6 +20,7 @@ import {
   useChatContext,
 } from '../contexts/ChatContext';
 
+// * to add custom background color for unread channels
 const CustomListItem = (props) => {
   const { unread } = props;
   const backgroundColor = unread ? '#8fcdea' : '#fff';
@@ -39,7 +40,7 @@ const sort = {
 };
 
 export const ChatChannelList = ({ navigation }) => {
-  const { setChannel } = useAppContext();
+  const { setChannel } = useChatContext();
   return (
     <ChannelList
       Preview={CustomListItem}
