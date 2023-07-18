@@ -54,3 +54,11 @@ export const evalElement = (title, newContent) => {
       return { bio: newContent };
   }
 };
+
+export const chatTheme = {
+  channelPreview: {
+    container: {
+      backgroundColor: 'transparent',
+    },
+  },
+};
