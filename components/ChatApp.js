@@ -43,7 +43,7 @@ const sort = {
 };
 
 const ChannelListScreen = ({ navigation }) => {
-  const { setChannel } = useAppContext();
+  const { setChannel } = useChatAppContext();
   return (
     <ChannelList
       Preview={CustomListItem}
@@ -58,7 +58,7 @@ const ChannelListScreen = ({ navigation }) => {
 };
 
 const ChannelScreen = ({ navigation }) => {
-  const { channel, setThread } = useAppContext();
+  const { channel, setThread } = useChatAppContext();
   return (
     <Channel channel={channel}>
       <MessageList
@@ -75,7 +75,7 @@ const ChannelScreen = ({ navigation }) => {
 };
 
 const ThreadScreen = ({ navigation }) => {
-  const { channel, thread } = useAppContext();
+  const { channel, thread } = useChatAppContext();
   return (
     <Channel channel={channel} thread={thread} threadList>
       <Thread />
@@ -124,14 +124,14 @@ const NavigationStack = () => {
 
 export default () => {
   return (
-    <AppProvider>
+    <ChatAppProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <SafeAreaView style={{ flex: 1 }}>
-          <NavigationContainer>
+          <NavigationContainer independent={true}>
             <NavigationStack />
           </NavigationContainer>
         </SafeAreaView>
       </GestureHandlerRootView>
-    </AppProvider>
+    </ChatAppProvider>
   );
 };
