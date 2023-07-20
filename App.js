@@ -1,20 +1,24 @@
-import "react-native-gesture-handler";
-import SignUp from "./screens/SignUp";
-import UserProfile from "./screens/UserProfile";
-import { NewsFeed } from "./screens/NewsFeed";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { useState, useEffect } from "react";
-import { UserContext } from "./utilities";
-import axios from "axios";
-import { Header } from "./components/Header.js";
+import 'react-native-gesture-handler';
+import SignUp from './screens/SignUp';
+import UserProfile from './screens/UserProfile';
+import { NewsFeed } from './screens/NewsFeed';
+import { createStackNavigator } from '@react-navigation/stack';
+import {
+  NavigationContainer,
+  useNavigation,
+} from '@react-navigation/native';
+import { useState, useEffect } from 'react';
+import { UserContext } from './utilities';
+import axios from 'axios';
+import { Header } from './components/Header.js';
+import ChatApp from './components/ChatApp';
 const Stack = createStackNavigator();
 
 export default function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    console.log("curr user", user)
+    console.log('curr user', user);
   }, [user]);
 
   return (
@@ -22,18 +26,20 @@ export default function App() {
       <UserContext.Provider value={{ user, setUser, axios }}>
         <Stack.Navigator
           screenOptions={{
-            header:()=>(<Header />),
+            header: () => <Header />,
             // headerShown: false,
           }}
         >
-          {user?
-          <>
-          <Stack.Screen name="Profile" component={UserProfile} />
-          <Stack.Screen name="NewsFeed" component={NewsFeed} />
-          </>
-          :
-          <Stack.Screen name="SignUp" component={SignUp} />
-          }
+          {user ? (
+            <>
+              <Stack.Screen name="Profile" component={UserProfile} />
+              <Stack.Screen name="Circles" component={ChatApp} />
+              <Stack.Screen name="Messages" component={ChatApp} />
+              <Stack.Screen name="NewsFeed" component={NewsFeed} />
+            </>
+          ) : (
+            <Stack.Screen name="SignUp" component={SignUp} />
+          )}
         </Stack.Navigator>
       </UserContext.Provider>
     </NavigationContainer>
