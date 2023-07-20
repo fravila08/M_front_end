@@ -102,7 +102,7 @@ const NavigationStack = () => {
 
   return (
     <OverlayProvider value={{ theme: chatTheme }}>
-      <Chat client={chatClient}>
+      <Chat chatClient={chatClient}>
         <Stack.Navigator>
           <Stack.Screen
             name="ChannelListScreen"

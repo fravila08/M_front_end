@@ -17,14 +17,15 @@ const chatClient = StreamChat.getInstance(chatApiKey);
 export const useChatClient = () => {
   const [clientIsReady, setClientIsReady] = useState(false);
   const chatUser = getLoggedInUser();
+  console.log('chatUser: ');
   console.log(chatUser);
 
   useEffect(() => {
     const setupClient = async () => {
       try {
-        chatClient.connectUser(
+        await chatClient.connectUser(
           chatUser,
-          client.devToken(chatUser.chatUserId.toString())
+          await chatClient.devToken(chatUser.id.toString())
         );
         setClientIsReady(true);
 
@@ -46,6 +47,9 @@ export const useChatClient = () => {
     if (!chatClient.userID) {
       setupClient();
     }
+
+    // close the WebSocket connection when component dismounts
+    return () => chatClient.disconnectUser();
   }, []);
 
   return {

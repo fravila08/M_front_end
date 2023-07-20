@@ -5,7 +5,7 @@ export const getLoggedInUser = () => {
   const { user } = useContext(UserContext);
   const chatUserId = user.id;
   const chatUserName = user.name;
-  return { chatUserId, chatUserName };
+  return { id: chatUserId, name: chatUserName };
 };
 
 export const chatApiKey = 'vnfrejsn6scx';
