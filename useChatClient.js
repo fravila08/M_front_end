@@ -2,28 +2,29 @@ import { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import {
   chatApiKey,
-  chatUserId,
-  chatUserName,
+  getLoggedInUser,
   // chatUserToken,
 } from './chatConfig';
 
-const user = {
-  id: chatUserId,
-  name: chatUserName,
-  image: 'https://getstream.io/random_svg/',
-};
+// const chatUser = {
+//   id: chatUserId,
+//   name: chatUserName,
+//   image: 'https://getstream.io/random_svg/',
+// };
 
 const chatClient = StreamChat.getInstance(chatApiKey);
 
 export const useChatClient = () => {
   const [clientIsReady, setClientIsReady] = useState(false);
+  const chatUser = getLoggedInUser();
+  console.log(chatUser);
 
   useEffect(() => {
     const setupClient = async () => {
       try {
         chatClient.connectUser(
-          user,
-          client.devToken(user.id.toString())
+          chatUser,
+          client.devToken(chatUser.chatUserId.toString())
         );
         setClientIsReady(true);
 

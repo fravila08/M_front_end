@@ -1,7 +1,15 @@
+import { useContext } from 'react';
+import { UserContext } from './utilities';
+
+export const getLoggedInUser = () => {
+  const { user } = useContext(UserContext);
+  const chatUserId = user.id;
+  const chatUserName = user.name;
+  return { chatUserId, chatUserName };
+};
+
 export const chatApiKey = 'vnfrejsn6scx';
 
-export const chatUserId = '';
-export const chatUserName = '';
 // export const chatUserToken = '';
 
 // * when integrating, store user info in local storage to fetch from backend
